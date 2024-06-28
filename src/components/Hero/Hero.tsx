@@ -11,7 +11,7 @@ const Hero = () => {
           alt="banner"
           width={1424}
           height={535}
-          className="object-cover absolute -z-10"
+          className="object-cover w-full absolute -z-10"
         ></Image>
         <div className="flex flex-col gap-5 relative left-20 justify-center w-fit">
           <Image

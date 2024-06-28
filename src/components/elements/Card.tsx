@@ -9,6 +9,7 @@ interface EventDetailsProps {
   city: string;
   country: string;
   price: number;
+  widht?: string;
   onClick?: () => void;
 }
 
@@ -20,9 +21,10 @@ const Card: React.FC<EventDetailsProps> = ({
   city,
   country,
   price,
+  widht,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-fit">
+    <div className="flex flex-col gap-2 w-full">
       <div className="relative">
         <div className="flex flex-col absolute justify-center bg-black p-3 top-2 left-2 rounded-lg">
           <h2 className="text-center">{date}</h2>
@@ -33,7 +35,7 @@ const Card: React.FC<EventDetailsProps> = ({
           alt="thumb"
           width={280}
           height={280}
-          className=""
+          className={`object-cover ${widht}`}
         ></Image>
       </div>
       <div className="flex flex-col gap-[6px]">

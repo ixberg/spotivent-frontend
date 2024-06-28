@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -28,7 +29,9 @@ const Header = () => {
           </div>
         </div>
         <div className="flex gap-4">
-          <button className="px-5">Sign Up</button>
+          <Link href="/signup">
+            <button className="px-5 h-full">Sign Up</button>
+          </Link>
           <button className="px-5 py-2 rounded-full bg-white text-black">
             Log In
           </button>
