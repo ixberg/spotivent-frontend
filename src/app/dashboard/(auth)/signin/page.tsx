@@ -18,7 +18,7 @@ const SignInPage = () => {
             <p className="font-bold text-6xl font-inter tracking-tighter">
               Spotivent
             </p>
-            <p className="font-light text-lg">Enjoy the amazing music fest!</p>
+            <p className="font-light text-lg">For Event Organizer</p>
           </div>
         </div>
       </div>

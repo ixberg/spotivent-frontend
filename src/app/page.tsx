@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero/Hero";
 import UpcomingEvent from "@/components/Home/Upcoming";
 import Category from "@/components/Home/Category";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Spotivent",
+  description: "Enjoy the amazing concert",
+};
 
 export default function Home() {
   return (
