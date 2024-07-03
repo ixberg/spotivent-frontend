@@ -17,20 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const disableHeaderFooter = [
-    "/signin",
-    "/signup",
-    "/dashboard",
-    "/dashboard/signin",
-    "/dashboard/signup",
-  ];
+  const disableHeaderFooter = ["/signin", "/signup"];
+
+  const shouldDisableHeaderFooter =
+    disableHeaderFooter.includes(pathname) || pathname.startsWith("/dashboard");
 
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {!disableHeaderFooter.includes(pathname) && <Header />}
+        {!shouldDisableHeaderFooter && <Header />}
         {children}
-        {!disableHeaderFooter.includes(pathname) && <Footer />}
+        {!shouldDisableHeaderFooter && <Footer />}
       </body>
     </html>
   );

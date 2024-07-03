@@ -13,7 +13,13 @@ const SignInPage = () => {
     <main className="flex items-center justify-center min-h-screen">
       <div className="flex basis-2/5 justify-center">
         <div className="flex gap-4 items-center">
-          <Image src="/Logo.svg" alt="logo" width={100} height={100} />
+          <Image
+            src="/Logo.svg"
+            alt="logo"
+            width={100}
+            height={100}
+            className="animate-spin"
+          />
           <div className="flex flex-col gap-4">
             <p className="font-bold text-6xl font-inter tracking-tighter">
               Spotivent
