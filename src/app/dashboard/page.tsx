@@ -3,7 +3,11 @@ import CardDataStats from "@/components/elements/CardDataStats";
 import React from "react";
 import { TicketCheck, UsersRound, BadgeDollarSign } from "lucide-react";
 import ChartOne from "@/components/elements/ChartOne";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
 const page = () => {
   return (
     <DefaultLayout>
