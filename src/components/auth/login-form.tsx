@@ -15,23 +15,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { RegisterSchema } from "@/schema";
+import { LoginSchema } from "@/schema";
 import { Eye, EyeOff } from "lucide-react";
-import { FormError } from "../../ui/form-error";
-import { FormSuccess } from "../../ui/form-success";
-import { register } from "@/actions/registerEo";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
+import { login } from "@/actions/login";
 import Link from "next/link";
 
-const SignUp = () => {
+const SignIn = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPanding, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -41,12 +40,12 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
 
-  function onSubmit(values: z.infer<typeof RegisterSchema>) {
+  function onSubmit(values: z.infer<typeof LoginSchema>) {
     setError("");
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
+      login(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });
@@ -56,29 +55,10 @@ const SignUp = () => {
   return (
     <div className="flex justify-center h-fit">
       <div className="flex flex-col gap-12 py-16 px-20 bg-background-100 w-[680px] rounded-xl">
-        <h1 className="text-center font-semibold text-3xl">
-          Create an account
-        </h1>
+        <h1 className="text-center font-bold text-3xl">Sign In</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your name"
-                        {...field}
-                        disabled={isPanding}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={form.control}
                 name="email"
@@ -133,7 +113,7 @@ const SignUp = () => {
               className="w-full"
               disabled={isPanding}
             >
-              Register
+              Login
             </Button>
             {/* <div className="flex gap-2 w-full items-center">
               <hr className="w-full border-dashed border-white/50" />
@@ -143,10 +123,10 @@ const SignUp = () => {
           </form>
         </Form>
         <p className="text-center">
-          Already have an account?{" "}
-          <Link href="/dashboard/signin">
+          Dont have an account?{" "}
+          <Link href="/dashboard/signup">
             <span className="font-semibold text-primary-500 cursor-pointer hover:underline">
-              Sign In
+              Sign Up
             </span>
           </Link>
         </p>
@@ -155,4 +135,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

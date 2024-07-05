@@ -15,11 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { RegisterSchema } from "@/schema";
+import { UserRegisterSchema } from "@/schema";
 import { Eye, EyeOff } from "lucide-react";
-import { FormError } from "../../ui/form-error";
-import { FormSuccess } from "../../ui/form-success";
-import { register } from "@/actions/registerEo";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
+import { register } from "@/actions/registerUser";
 import Link from "next/link";
 
 const SignUp = () => {
@@ -28,12 +28,13 @@ const SignUp = () => {
   const [isPanding, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof UserRegisterSchema>>({
+    resolver: zodResolver(UserRegisterSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      referralCode: "",
     },
   });
 
@@ -41,7 +42,7 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
 
-  function onSubmit(values: z.infer<typeof RegisterSchema>) {
+  function onSubmit(values: z.infer<typeof UserRegisterSchema>) {
     setError("");
     setSuccess("");
 
@@ -124,6 +125,23 @@ const SignUp = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="referralCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Referral Code</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter referral code (optional)"
+                        {...field}
+                        disabled={isPanding}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
             <FormError message={error}></FormError>
             <FormSuccess message={success}></FormSuccess>
@@ -144,7 +162,7 @@ const SignUp = () => {
         </Form>
         <p className="text-center">
           Already have an account?{" "}
-          <Link href="/dashboard/signin">
+          <Link href="/signin">
             <span className="font-semibold text-primary-500 cursor-pointer hover:underline">
               Sign In
             </span>

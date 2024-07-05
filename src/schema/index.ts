@@ -20,3 +20,16 @@ export const RegisterSchema = z.object({
     message: "Minimum 8 character required!",
   }),
 });
+
+export const UserRegisterSchema = z.object({
+  name: z.string().min(2, {
+    message: "Name is required, minimum 2 characters",
+  }),
+  email: z.string().email({
+    message: "Email is required",
+  }),
+  password: z.string().min(8, {
+    message: "Minimum 8 character required!",
+  }),
+  referralCode: z.string().optional(),
+});
