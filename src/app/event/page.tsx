@@ -1,17 +1,26 @@
+"use client";
+// src/app/event/page.tsx
 import React from "react";
 import Image from "next/image";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ChevronDown } from "lucide-react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 import { Button } from "@/components/ui/button";
+import TicketComponent from "@/components/elements/Ticket";
+import { StarsIcon } from "lucide-react";
 
 const Event: React.FC = () => {
+  const ticketOrders = useSelector(
+    (state: RootState) => state.tickets.ticketOrders
+  );
+
+  // Calculate the total price
+  const totalPrice = ticketOrders.reduce(
+    (total, order) => total + order.price * order.quantity,
+    0
+  );
+
   return (
-    <section className="px-2 w-full">
+    <section className="px-2 w-full mt-10">
       <div className="flex flex-col w-full bg-background-100 h-fit rounded-lg p-20 gap-10">
         <div className="rounded-lg overflow-hidden">
           <Image
@@ -22,7 +31,7 @@ const Event: React.FC = () => {
             priority
             quality={100}
             className="w-full object-cover"
-          ></Image>
+          />
         </div>
         <div className="flex gap-12">
           <div className="flex flex-col gap-8 basis-3/5">
@@ -36,7 +45,7 @@ const Event: React.FC = () => {
                   alt="icon-loc"
                   width={24}
                   height={24}
-                ></Image>
+                />
                 <p>Parkiran Utama Mall @ Alam Sutera</p>
               </div>
               <p>
@@ -50,29 +59,61 @@ const Event: React.FC = () => {
                   alt="icon-loc"
                   width={24}
                   height={24}
-                ></Image>
+                />
                 <p>September 22, 2021 · 20.00 - 21.56 WIB</p>
               </div>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               <h1 className="font-bold font-syne text-xl">Choose your seat</h1>
+              <div className="flex flex-col gap-3">
+                <TicketComponent ticketName="VIP" price={2000000} />
+                <TicketComponent
+                  ticketName="General Admission"
+                  price={1000000}
+                />
+                <TicketComponent ticketName="Student" price={500000} />
+              </div>
             </div>
           </div>
           <div className="flex flex-col basis-2/5 gap-6">
             <div className="flex flex-col gap-3 border-white border-[1px] p-6 rounded-2xl">
-              <h2>Ticket starting from</h2>
-              <p className="text-primary-500 font-bold text-3xl">
-                Rp. <span>500.000,00</span>
-              </p>
+              <h2 className="text-white/50">Hosted by</h2>
+              <div className="flex gap-4 items-center">
+                <div className="p-3 bg-primary-600 rounded-full">
+                  <StarsIcon />
+                </div>
+                <p className="font-medium text-xl">Event Organizer Name</p>
+              </div>
             </div>
-            <div className="flex flex-col gap-3 border-white border-[1px] p-6 rounded-2xl">
-              <h2>Venue</h2>
-              <Image
-                src="/image/vanue.png"
-                alt="vanue-image"
-                width={378}
-                height={278}
-              ></Image>
+            <div className="flex flex-col gap-3 border-white border-[1px] p-6 rounded-2xl sticky top-[120px] overflow-auto">
+              <h2>Your Ticket Order</h2>
+              <div>
+                {ticketOrders.length === 0 ? (
+                  <p className="text-white/50">No Ticket Selected</p>
+                ) : (
+                  ticketOrders.map((order) => (
+                    <div key={order.name} className="flex justify-between">
+                      <span>
+                        {order.name} x {order.quantity}
+                      </span>
+                      <span>
+                        Rp
+                        {(order.price * order.quantity).toLocaleString("id-ID")}
+                      </span>
+                    </div>
+                  ))
+                )}
+                {/* Total Price */}
+                {ticketOrders.length > 0 && (
+                  <div className="flex justify-between mt-4 pt-4 border-t border-gray-600">
+                    <span className="font-bold">Total:</span>
+                    <span className="font-bold">
+                      Rp{totalPrice.toLocaleString("id-ID")}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <Button>Book Now</Button>
             </div>
           </div>
         </div>

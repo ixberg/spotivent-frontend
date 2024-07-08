@@ -3,28 +3,29 @@ import Image from "next/image";
 
 interface EventDetailsProps {
   date: string;
-  thumbnail: string;
   month: string;
+  thumbnail: string;
   title: string;
   city: string;
   country: string;
   price: number;
-  widht?: string;
+  width?: string;
   onClick?: () => void;
 }
 
 const Card: React.FC<EventDetailsProps> = ({
   date,
-  thumbnail,
   month,
+  thumbnail,
   title,
   city,
   country,
   price,
-  widht,
+  width,
+  onClick,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div onClick={onClick} className="flex flex-col gap-2 w-full">
       <div className="relative">
         <div className="flex flex-col absolute justify-center bg-black p-3 top-2 left-2 rounded-lg">
           <h2 className="text-center">{date}</h2>
@@ -35,7 +36,7 @@ const Card: React.FC<EventDetailsProps> = ({
           alt="thumb"
           width={280}
           height={280}
-          className={`object-cover ${widht}`}
+          className={`object-cover rounded-lg h-[280px] ${width}`}
         ></Image>
       </div>
       <div className="flex flex-col gap-[6px]">

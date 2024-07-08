@@ -4,14 +4,14 @@ import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
-    <div className="px-2 w-full">
-      <div className="flex items-center relative h-[535px]">
+    <div className="px-2 w-full mt-[96px]">
+      <div className="flex items-center relative h-[535px] rounded-lg overflow-hidden">
         <Image
           src="/image/banner.png"
           alt="banner"
           width={1424}
           height={535}
-          className="object-cover w-full absolute -z-10"
+          className="object-cover h-full w-full absolute -z-10"
         ></Image>
         <div className="flex flex-col gap-5 relative left-20 justify-center w-fit">
           <Image

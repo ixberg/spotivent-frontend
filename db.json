@@ -1,0 +1,247 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "date": "12 July 2024",
+      "time": "18:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Music Concert",
+      "category": "Music Festival",
+      "description": "Get ready for an unforgettable weekend of music, discovery, and connection at the Harmony Festival! Don't miss your chance to be a part of this epic music celebration! Head over to the Harmony Festival website to snag your tickets and start planning your unforgettable festival experience.",
+      "city": "Jakarta",
+      "country": "Indonesia",
+      "location": "Jl. Jend. Sudirman No.1, Jakarta",
+      "price": 500000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 500000,
+          "quantity": 1000
+        },
+        {
+          "tier": "VIP",
+          "price": 1000000,
+          "quantity": 500
+        }
+      ],
+      "event_organizer": "Global Concerts Inc."
+    },
+    {
+      "id": 2,
+      "date": "25 August 2024",
+      "time": "19:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Opera Night",
+      "category": "Opera",
+      "description": "A splendid night of opera with performances by renowned opera singers. Don't miss your chance to be a part of this epic music celebration! Head over to the Harmony Festival website to snag your tickets and start planning your unforgettable festival experience.",
+      "city": "Bandung",
+      "country": "Indonesia",
+      "location": "Jl. Asia Afrika No.65, Bandung",
+      "price": 300000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 300000,
+          "quantity": 800
+        },
+        {
+          "tier": "VIP",
+          "price": 750000,
+          "quantity": 400
+        }
+      ],
+      "event_organizer": "Opera Indonesia"
+    },
+    {
+      "id": 3,
+      "date": "5 September 2024",
+      "time": "20:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Jazz Extravaganza",
+      "category": "Jazz Music",
+      "description": "A night of smooth jazz with performances by top jazz musicians. Don't miss your chance to be a part of this epic music celebration! Head over to the Harmony Festival website to snag your tickets and start planning your unforgettable festival experience.",
+      "city": "Surabaya",
+      "country": "Indonesia",
+      "location": "Jl. Raya Darmo No.99, Surabaya",
+      "price": 1000000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 1000000,
+          "quantity": 600
+        },
+        {
+          "tier": "VIP",
+          "price": 2000000,
+          "quantity": 300
+        }
+      ],
+      "event_organizer": "Jazz World"
+    },
+    {
+      "id": 4,
+      "date": "15 October 2024",
+      "time": "17:30",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Classical Symphony",
+      "category": "Classical",
+      "description": "An evening of classical music with performances by a world-renowned symphony orchestra.",
+      "city": "Medan",
+      "country": "Indonesia",
+      "location": "Jl. Bukit Barisan No.75, Medan",
+      "price": 800000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 800000,
+          "quantity": 700
+        },
+        {
+          "tier": "VIP",
+          "price": 1500000,
+          "quantity": 350
+        }
+      ],
+      "event_organizer": "Symphony Orchestra"
+    },
+    {
+      "id": 5,
+      "date": "22 November 2024",
+      "time": "19:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Jazz Night",
+      "category": "Jazz Music",
+      "description": "A night filled with soulful jazz performances.Don't miss your chance to be a part of this epic music celebration! Head over to the Harmony Festival website to snag your tickets and start planning your unforgettable festival experience.",
+      "city": "Yogyakarta",
+      "country": "Indonesia",
+      "location": "Jl. Malioboro No.12, Yogyakarta",
+      "price": 600000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 600000,
+          "quantity": 900
+        },
+        {
+          "tier": "VIP",
+          "price": 1200000,
+          "quantity": 450
+        }
+      ],
+      "event_organizer": "Jazz Nights"
+    },
+    {
+      "id": 6,
+      "date": "30 December 2024",
+      "time": "18:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Rock Fest",
+      "category": "Music Festival",
+      "description": "A rock music festival featuring famous rock bands.",
+      "city": "Bali",
+      "country": "Indonesia",
+      "location": "Jl. Legian No.88, Bali",
+      "price": 700000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 700000,
+          "quantity": 1200
+        },
+        {
+          "tier": "VIP",
+          "price": 1400000,
+          "quantity": 600
+        }
+      ],
+      "event_organizer": "Rock Fest Productions"
+    },
+    {
+      "id": 7,
+      "date": "8 January 2024",
+      "time": "18:30",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Indie Music Fest",
+      "category": "Music Festival",
+      "description": "A festival showcasing the best indie music bands.",
+      "city": "Jakarta",
+      "country": "Indonesia",
+      "location": "Jl. Thamrin No.1, Jakarta",
+      "price": 550000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 550000,
+          "quantity": 1000
+        },
+        {
+          "tier": "VIP",
+          "price": 1100000,
+          "quantity": 500
+        }
+      ],
+      "event_organizer": "Indie Fest Inc."
+    },
+    {
+      "id": 8,
+      "date": "20 February 2024",
+      "time": "19:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Pop Concert",
+      "category": "Solo Artist",
+      "description": "A pop concert by a famous solo artist.",
+      "city": "Semarang",
+      "country": "Indonesia",
+      "location": "Jl. Pahlawan No.50, Semarang",
+      "price": 450000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 450000,
+          "quantity": 800
+        },
+        {
+          "tier": "VIP",
+          "price": 900000,
+          "quantity": 400
+        }
+      ],
+      "event_organizer": "Pop Events"
+    },
+    {
+      "id": 9,
+      "date": "14 March 2024",
+      "time": "18:00",
+      "thumbnail": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "banner_image": "https://res.cloudinary.com/dhhnqrf1p/image/upload/v1720325850/Thumbnail_wrohtn.png",
+      "title": "Reggae Fest",
+      "category": "Music Festival",
+      "description": "A reggae music festival with performances by top reggae bands.",
+      "city": "Makassar",
+      "country": "Indonesia",
+      "location": "Jl. Ahmad Yani No.100, Makassar",
+      "price": 500000,
+      "ticket_tier": [
+        {
+          "tier": "Regular",
+          "price": 450000,
+          "quantity": 900
+        },
+        {
+          "tier": "VIP",
+          "price": 900000,
+          "quantity": 450
+        }
+      ],
+      "event_organizer": "Pop Events"
+    }
+  ]
+}

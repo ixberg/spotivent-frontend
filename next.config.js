@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  images: {
+    domains: ["randomuser.me", "res.cloudinary.com"],
+  },
 };
 
 module.exports = nextConfig;

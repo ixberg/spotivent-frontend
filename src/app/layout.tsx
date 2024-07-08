@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "./header";
 import Footer from "@/components/Footer/Footer";
 import { usePathname } from "next/navigation";
+import ReduxProvider from "./ReduxProvide";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {!shouldDisableHeaderFooter && <Header />}
-        {children}
-        {!shouldDisableHeaderFooter && <Footer />}
+        <ReduxProvider>
+          {!shouldDisableHeaderFooter && <Header />}
+          {children}
+          {!shouldDisableHeaderFooter && <Footer />}
+        </ReduxProvider>
       </body>
     </html>
   );
