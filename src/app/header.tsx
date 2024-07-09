@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="w-full p-2 bg-background-500 z-50 fixed">
       <div className="flex justify-between items-center bg-background-100 h-[80px] rounded-lg px-10 relative">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 items-center">
           <Image src="/Logo.svg" alt="logo" width={44} height={44} />
           <p className="font-bold text-xl font-inter tracking-tighter">
             Spotivent

@@ -21,7 +21,9 @@ export default function RootLayout({
   const disableHeaderFooter = ["/signin", "/signup"];
 
   const shouldDisableHeaderFooter =
-    disableHeaderFooter.includes(pathname) || pathname.startsWith("/dashboard");
+    disableHeaderFooter.includes(pathname) ||
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/checkout");
 
   return (
     <html lang="en">

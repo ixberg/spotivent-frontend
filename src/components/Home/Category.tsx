@@ -4,6 +4,8 @@ import axios from "axios";
 import { Button } from "../ui/button";
 import Card from "../elements/Card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useRouter } from "next/navigation";
+import slugify from "@/lib/slugify";
 // import { Skeleton } from "@shadcn/ui"; // Import Skeleton component
 
 interface Event {
@@ -29,6 +31,7 @@ const Category = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // Loading state
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +53,11 @@ const Category = () => {
     filterEvents(selectedCategory);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
+
+  const handleCardClick = (event: Event) => {
+    const slug = slugify(event.title);
+    router.push(`/event/${event.id}/${slug}`);
+  };
 
   const filterEvents = (category: string) => {
     setSelectedCategory(category);
@@ -123,6 +131,7 @@ const Category = () => {
                   country={event.country}
                   price={event.price}
                   width="w-full"
+                  onClick={() => handleCardClick(event)}
                 />
               ))
             ) : (

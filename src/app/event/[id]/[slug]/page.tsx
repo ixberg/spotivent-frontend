@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
@@ -27,6 +27,7 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
     (state: RootState) => state.tickets.ticketOrders
   );
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // Calculate the total price
   const totalPrice = ticketOrders.reduce(
@@ -52,14 +53,19 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
   if (!event) {
     return (
       <main className="flex min-h-screen flex-col items-center gap-2">
-        <div>Event not found..</div>
+        <div className="mt-[96px]">Event not found..</div>
       </main>
     );
   }
 
+  const handleBookNow = () => {
+    if (ticketOrders.length > 0) {
+      router.push(`/checkout/${slug}`);
+    }
+  };
   return (
     <main className="flex min-h-screen flex-col items-center gap-2">
-      <section className="px-2 w-full mt-10">
+      <section className="px-2 w-full mt-[96px]">
         <div className="flex flex-col w-full bg-background-100 h-fit rounded-lg p-20 gap-10">
           <div className="rounded-lg overflow-hidden">
             <Image
@@ -74,7 +80,9 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
           </div>
           <div className="flex gap-12">
             <div className="flex flex-col gap-8 basis-3/5">
-              <h1 className="font-syne text-3xl font-bold">{event.title}</h1>
+              <h1 className="font-syne text-3xl font-bold text-primary-500">
+                {event.title}
+              </h1>
               <div className="flex flex-col gap-3">
                 <div className="flex gap-3">
                   <Image
@@ -100,7 +108,7 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
               </div>
               <div className="flex flex-col gap-4">
                 <h1 className="font-bold font-syne text-xl">
-                  Choose your seat
+                  Choose your ticket
                 </h1>
                 <div className="flex flex-col gap-3">
                   {event.ticket_tier.map((tier) => (
@@ -124,10 +132,12 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
                 </div>
               </div>
               <div className="flex flex-col gap-3 border-white border-[1px] p-6 rounded-2xl sticky top-[120px] overflow-auto">
-                <h2>Your Ticket Order</h2>
+                <h2 className="text-white/50">Your Ticket Order</h2>
                 <div>
                   {ticketOrders.length === 0 ? (
-                    <p className="text-white/50">No Ticket Selected</p>
+                    <p className="text-white/50 font-thin">
+                      No Ticket Selected
+                    </p>
                   ) : (
                     ticketOrders.map((order) => (
                       <div key={order.name} className="flex justify-between">
@@ -153,7 +163,12 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
                     </div>
                   )}
                 </div>
-                <Button>Book Now</Button>
+                <Button
+                  onClick={handleBookNow}
+                  disabled={ticketOrders.length === 0}
+                >
+                  Book Now
+                </Button>
               </div>
             </div>
           </div>

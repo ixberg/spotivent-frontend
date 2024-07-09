@@ -25,19 +25,24 @@ const Card: React.FC<EventDetailsProps> = ({
   onClick,
 }) => {
   return (
-    <div onClick={onClick} className="flex flex-col gap-2 w-full">
+    <div
+      onClick={onClick}
+      className="flex flex-col gap-2 w-full cursor-pointer group"
+    >
       <div className="relative">
-        <div className="flex flex-col absolute justify-center bg-black p-3 top-2 left-2 rounded-lg">
+        <div className="flex flex-col absolute justify-center bg-black p-3 top-2 left-2 rounded-lg z-10">
           <h2 className="text-center">{date}</h2>
           <p className="text-center">{month}</p>
         </div>
-        <Image
-          src={thumbnail}
-          alt="thumb"
-          width={280}
-          height={280}
-          className={`object-cover rounded-lg h-[280px] ${width}`}
-        ></Image>
+        <div className="overflow-hidden rounded-lg">
+          <Image
+            src={thumbnail}
+            alt="thumb"
+            width={280}
+            height={280}
+            className={`object-cover rounded-lg h-[280px] transition-transform transform group-hover:scale-110 ${width}`}
+          ></Image>
+        </div>
       </div>
       <div className="flex flex-col gap-[6px]">
         <p className="font-medium text-xl">{title}</p>

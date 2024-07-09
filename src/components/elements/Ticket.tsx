@@ -35,14 +35,15 @@ const TicketComponent: React.FC<TicketComponentProps> = ({
       </div>
       <hr className="border-dashed border-white/20" />
       <div className="flex justify-between items-center">
-        <p className="text-2xl font-bold mb-2 text-primary-500">
-          Rp{price.toLocaleString("id-ID")}
+        <p className="text-2xl font-bold text-primary-500">
+          Rp{price.toLocaleString("id-ID")}{" "}
+          <span className="font-normal text-white/50 text-sm">/ pax</span>
         </p>
         <div className="flex items-center justify-between">
           <select
             value={quantity}
             onChange={handleQuantityChange}
-            className="border rounded p-1 text-background-100"
+            className="border rounded-lg py-1 px-3 bg-background-50"
           >
             {Array.from({ length: 11 }, (_, num) => (
               <option key={num} value={num}>

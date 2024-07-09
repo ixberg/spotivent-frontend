@@ -23,6 +23,11 @@
           "tier": "VIP",
           "price": 1000000,
           "quantity": 500
+        },
+        {
+          "tier": "VVIP",
+          "price": 2000000,
+          "quantity": 500
         }
       ],
       "event_organizer": "Global Concerts Inc."
@@ -212,6 +217,11 @@
           "tier": "VIP",
           "price": 900000,
           "quantity": 400
+        },
+        {
+          "tier": "VIP",
+          "price": 900000,
+          "quantity": 400
         }
       ],
       "event_organizer": "Pop Events"
@@ -237,6 +247,16 @@
         },
         {
           "tier": "VIP",
+          "price": 900000,
+          "quantity": 450
+        },
+        {
+          "tier": "VVIP",
+          "price": 900000,
+          "quantity": 450
+        },
+        {
+          "tier": "VVVIP",
           "price": 900000,
           "quantity": 450
         }
