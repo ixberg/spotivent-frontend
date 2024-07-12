@@ -25,6 +25,26 @@ interface Event {
   event_organizer: string;
 }
 
+const monthAbbreviations: { [key: string]: string } = {
+  January: "Jan",
+  February: "Feb",
+  March: "Mar",
+  April: "Apr",
+  May: "May",
+  June: "Jun",
+  July: "Jul",
+  August: "Aug",
+  September: "Sep",
+  October: "Oct",
+  November: "Nov",
+  December: "Dec",
+};
+
+const splitDate = (dateString: string): { day: string; month: string } => {
+  const [day, month, year] = dateString.split(" ");
+  return { day, month: monthAbbreviations[month] };
+};
+
 const Category = () => {
   const [selectedCategory, setSelectedCategory] =
     useState<string>("All Concerts");
@@ -123,8 +143,8 @@ const Category = () => {
               filteredEvents.map((event) => (
                 <Card
                   key={event.id}
-                  date={event.date.split(" ")[0]}
-                  month={event.date.split(" ")[1]}
+                  date={splitDate(event.date).day}
+                  month={splitDate(event.date).month}
                   thumbnail={event.thumbnail}
                   title={event.title}
                   city={event.city}

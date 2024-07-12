@@ -31,7 +31,7 @@ const TicketComponent: React.FC<TicketComponentProps> = ({
       <div className="absolute bg-background-100 rounded-full p-4 border-l-white/50 border-l-[1px] w-fit -right-5 top-[88px]"></div>
       <div>
         <h2 className="text-lg font-semibold mb-2">{ticketName}</h2>
-        <p className="text-gray-500 mb-2">Price exclude tax</p>
+        <p className="text-gray-500 mb-2">Price include tax</p>
       </div>
       <hr className="border-dashed border-white/20" />
       <div className="flex justify-between items-center">

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Card from "../elements/Card"; // Assuming your existing card component
+import Card from "../elements/Card";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import slugify from "@/lib/slugify"; // Import the slugify utility
+import slugify from "@/lib/slugify";
 
 interface Event {
   id: number;
@@ -23,9 +23,24 @@ interface Event {
   price: number;
 }
 
-const splitDate = (dateString: string) => {
+const monthAbbreviations: { [key: string]: string } = {
+  January: "Jan",
+  February: "Feb",
+  March: "Mar",
+  April: "Apr",
+  May: "May",
+  June: "Jun",
+  July: "Jul",
+  August: "Aug",
+  September: "Sep",
+  October: "Oct",
+  November: "Nov",
+  December: "Dec",
+};
+
+const splitDate = (dateString: string): { day: string; month: string } => {
   const [day, month, year] = dateString.split(" ");
-  return { day, month };
+  return { day, month: monthAbbreviations[month] };
 };
 
 const Upcoming: React.FC = () => {

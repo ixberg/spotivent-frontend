@@ -63,6 +63,7 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
       router.push(`/checkout/${slug}`);
     }
   };
+
   return (
     <main className="flex min-h-screen flex-col items-center gap-2">
       <section className="px-2 w-full mt-[96px]">

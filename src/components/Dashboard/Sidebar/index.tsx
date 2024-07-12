@@ -100,14 +100,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             ))}
           </nav>
           {/* <!-- Sidebar Menu --> */}
-          <div className="px-4 w-full">
-            <Button className="w-full flex gap-1 rounded-lg">
-              <span>
-                <Plus size={20} />
-              </span>
-              Create Event
-            </Button>
-          </div>
         </div>
       </aside>
     </ClickOutside>
