@@ -1,13 +1,5 @@
+"use client";
 import React, { useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -18,181 +10,325 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DatePicker } from "@/components/elements/DatePicker";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2, MousePointerClick, ToggleLeft } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  MousePointerClick,
+  ToggleLeft,
+  TicketPercent,
+} from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-
-interface TicketTier {
-  name: string;
-  seats: string;
-  price: string;
-}
+import { createEventSchema } from "@/schema";
+import { useForm, useFieldArray } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const CreateEventForm: React.FC = () => {
-  const [ticketTiers, setTicketTiers] = useState<TicketTier[]>([
-    { name: "", seats: "", price: "" },
-  ]);
   const [isFreeEvent, setIsFreeEvent] = useState<boolean>(false);
 
-  const addTicketTier = () => {
-    setTicketTiers([...ticketTiers, { name: "", seats: "", price: "" }]);
-  };
+  const form = useForm<z.infer<typeof createEventSchema>>({
+    resolver: zodResolver(createEventSchema),
+    defaultValues: {
+      eventName: "",
+      category: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+      city: "",
+      location: "",
+      description: "",
+      thumbnail: "",
+      bannerImage: "",
+      isFreeEvent: false,
+      ticketTiers: [{ name: "", seats: "", price: "" }],
+    },
+  });
 
-  const removeTicketTier = (index: number) => {
-    const newTicketTiers = [...ticketTiers];
-    newTicketTiers.splice(index, 1);
-    setTicketTiers(newTicketTiers);
-  };
-
-  const handleInputChange = (
-    index: number,
-    field: keyof TicketTier,
-    value: string
-  ) => {
-    const newTicketTiers = [...ticketTiers];
-    newTicketTiers[index][field] = value;
-    setTicketTiers(newTicketTiers);
-  };
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "ticketTiers",
+  });
 
   const handleFreeEventSwitch = () => {
     setIsFreeEvent(!isFreeEvent);
     if (!isFreeEvent) {
-      setTicketTiers([{ name: "Free Ticket", seats: "", price: "0" }]);
+      form.setValue("ticketTiers", [
+        { name: "Free Ticket", seats: "", price: "0" },
+      ]);
     } else {
-      setTicketTiers([{ name: "", seats: "", price: "" }]);
+      form.setValue("ticketTiers", [{ name: "", seats: "", price: "" }]);
     }
   };
 
+  function onSubmit(value: z.infer<typeof createEventSchema>) {
+    console.log(value);
+  }
+
   return (
-    <div>
-      <form action="">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="mb-8">
           <h1 className="font-semibold text-2xl text-primary-500">
             Event Detail
           </h1>
         </div>
         <div className="grid grid-cols-2 gap-4 gap-y-10">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="eventId">Event Name</Label>
-            <Input placeholder="Enter event name" id="event_id" required />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label>Select Category</Label>
-            <Select name="eventId">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label>Date</Label>
-            <DatePicker />
-          </div>
-          <div className="flex gap-4 items-center">
-            <div className="flex flex-col gap-2 w-full">
-              <Label>Start Time</Label>
-              <Input type="time" name="start_time" required></Input>
-            </div>
-            <div className="flex flex-col gap-2 w-full">
-              <Label>End Time</Label>
-              <Input type="time" name="start_time"></Input>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label>City</Label>
-            <Select name="cityId">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select City" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="eventId">Location</Label>
-            <Input
-              placeholder="Enter event location"
-              name="eventId"
-              id="eventId"
-              required
+          <FormField
+            control={form.control}
+            name="eventName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Event Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter event name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Select Category</FormLabel>
+                <Select
+                  onValueChange={(value) => field.onChange(value)}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="system">System</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="date"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Date</FormLabel>
+                <FormControl>
+                  <Input type="date" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex gap-2 w-full">
+            <FormField
+              control={form.control}
+              name="startTime"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Start Time</FormLabel>
+                  <FormControl>
+                    <Input type="time" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="endTime"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>End Time</FormLabel>
+                  <FormControl>
+                    <Input type="time" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </div>
-        </div>
-        <div className="flex flex-col gap-2 mt-10">
-          <Label>Description</Label>
-          <Textarea></Textarea>
-        </div>
-        <div className="bg-black/50 p-8 mt-8 rounded-xl flex justify-between items-center">
-          <div>
-            <h1 className="font-semibold text-2xl text-yellow-500">
-              Free Event?
-            </h1>
-            <p className="flex gap-2 items-center">
-              Activate the switch button if your event is free{" "}
-              <span className="flex gap-1">
-                <ToggleLeft size={28} />
-                <MousePointerClick />
-              </span>
-            </p>
-          </div>
-
-          <Switch
-            checked={isFreeEvent}
-            onCheckedChange={handleFreeEventSwitch}
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>City</FormLabel>
+                <Select
+                  onValueChange={(value) => field.onChange(value)}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select City" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="system">System</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Location</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter event location" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
         </div>
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem className="mt-10">
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Enter event description" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="bg-black/50 p-8 mt-8 rounded-xl flex gap-4">
+          <FormField
+            control={form.control}
+            name="thumbnail"
+            render={({ field }) => (
+              <FormItem className="flex flex-col gap-2 w-full basis-2/5">
+                <FormLabel>Thumbnail</FormLabel>
+                <FormControl>
+                  <Input type="file" {...field} className="border-white/10" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="bannerImage"
+            render={({ field }) => (
+              <FormItem className="flex flex-col gap-2 w-full basis 3/5">
+                <FormLabel>Banner image</FormLabel>
+                <FormControl>
+                  <Input type="file" {...field} className="border-white/10" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={form.control}
+          name="isFreeEvent"
+          render={({ field }) => (
+            <div className="bg-black/50 p-8 mt-8 rounded-xl flex justify-between items-center">
+              <div>
+                <h1 className="font-semibold text-2xl text-yellow-500">
+                  Free Event?
+                </h1>
+                <p className="flex gap-2 items-center">
+                  Activate the switch button if your event is free{" "}
+                  <span className="flex gap-1">
+                    <ToggleLeft size={28} />
+                    <MousePointerClick />
+                  </span>
+                </p>
+              </div>
+              <Switch
+                checked={isFreeEvent}
+                onCheckedChange={(value) => {
+                  field.onChange(value);
+                  handleFreeEventSwitch();
+                }}
+              />
+            </div>
+          )}
+        />
         <div className="my-8 bg-black/50 p-8 rounded-xl flex flex-col gap-6 w-full">
-          <h1 className="font-medium text-xl text-primary-500">Ticket Tier</h1>
-          {ticketTiers.map((tier, index) => (
-            <div key={index} className="flex gap-4 w-full items-end">
-              <div className="flex flex-col gap-2 w-full">
-                <Label>Ticket Name</Label>
-                <Input
-                  type="text"
-                  placeholder="Enter ticket name"
-                  value={tier.name}
-                  onChange={(e) =>
-                    handleInputChange(index, "name", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex flex-col gap-2 w-full">
-                <Label>Available Seat</Label>
-                <Input
-                  type="number"
-                  value={tier.seats}
-                  onChange={(e) =>
-                    handleInputChange(index, "seats", e.target.value)
-                  }
-                />
-              </div>
-              <div className="flex flex-col gap-2 w-full">
-                <Label>Price (Rp)</Label>
-                <Input
-                  type="number"
-                  placeholder="1000000"
-                  value={tier.price}
-                  onChange={(e) =>
-                    handleInputChange(index, "price", e.target.value)
-                  }
-                  disabled={isFreeEvent}
-                />
-              </div>
-              {ticketTiers.length > 1 && (
+          <h1 className="font-semibold text-xl text-primary-500">
+            Ticket Tier
+          </h1>
+          {fields.map((field, index) => (
+            <div key={field.id} className="flex gap-4 w-full items-center">
+              <FormField
+                control={form.control}
+                name={`ticketTiers.${index}.name`}
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <Label>Ticket Name</Label>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Enter ticket name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`ticketTiers.${index}.seats`}
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <Label>Available Seat</Label>
+                    <FormControl>
+                      <Input type="number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`ticketTiers.${index}.price`}
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <Label>Price (Rp)</Label>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="1000000"
+                        {...field}
+                        disabled={isFreeEvent}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {fields.length > 1 && (
                 <Button
                   variant={"destructive"}
-                  onClick={() => removeTicketTier(index)}
+                  onClick={() => remove(index)}
                   className="rounded-lg h-[54px]"
                   disabled={isFreeEvent}
+                  type="button"
                 >
                   <Trash2 size={20} className="text-white" />
                 </Button>
@@ -204,7 +340,7 @@ const CreateEventForm: React.FC = () => {
               <Button
                 variant={"secondary"}
                 size={"lg"}
-                onClick={addTicketTier}
+                onClick={() => append({ name: "", seats: "", price: "" })}
                 disabled={isFreeEvent}
                 type="button"
               >
@@ -214,11 +350,27 @@ const CreateEventForm: React.FC = () => {
             </div>
           </div>
         </div>
+        <div className="my-8 bg-black/50 p-8 rounded-xl flex flex-col gap-6 w-full">
+          <div>
+            <h1 className="font-semibold text-xl text-primary-500">
+              Create Voucher{" "}
+              <span className="text-sm text-white/50 font-light">
+                (optional)
+              </span>
+            </h1>
+            <p className="flex gap-2 items-center">
+              You can add voucher for your event
+              <span className="flex gap-1">
+                <TicketPercent size={28} />
+              </span>
+            </p>
+          </div>
+        </div>
         <Button type="submit" size={"lg"}>
           Create Event
         </Button>
       </form>
-    </div>
+    </Form>
   );
 };
 

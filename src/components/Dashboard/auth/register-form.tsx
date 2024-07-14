@@ -44,6 +44,7 @@ const SignUp = () => {
   function onSubmit(values: z.infer<typeof RegisterSchema>) {
     setError("");
     setSuccess("");
+    console.log(values);
 
     startTransition(() => {
       register(values).then((data) => {
@@ -97,6 +98,7 @@ const SignUp = () => {
                   </FormItem>
                 )}
               />
+              <div>Event</div>
               <FormField
                 control={form.control}
                 name="password"

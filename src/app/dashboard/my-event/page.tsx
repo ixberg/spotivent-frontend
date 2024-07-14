@@ -5,6 +5,11 @@ import { Plus } from "lucide-react";
 import { DataTable } from "@/components/ui/data-table";
 import { column } from "./components/column-table";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | My Event",
+};
 
 const page = () => {
   return (
