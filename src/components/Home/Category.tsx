@@ -90,9 +90,11 @@ const Category = () => {
 
   return (
     <div className="px-2 w-full">
-      <div className="flex flex-col w-full bg-background-100 h-fit rounded-lg p-20 gap-10">
+      <div className="flex flex-col w-full bg-background-100 h-fit rounded-lg p-10 lg:p-20 gap-5 lg:gap-10 ">
         <div className="flex justify-between w-full">
-          <h1 className="font-syne text-3xl font-bold">Concert Category</h1>
+          <h1 className="font-syne text-2xl lg:text-3xl font-bold">
+            Concert Category
+          </h1>
         </div>
 
         <Tabs
@@ -101,8 +103,8 @@ const Category = () => {
           onValueChange={filterEvents}
           className="flex flex-col gap-10"
         >
-          <div className="flex justify-between overflow-hidden sticky top-[96px] z-40 bg-background-100 py-2">
-            <TabsList className="flex gap-3">
+          <div className="flex justify-between sticky top-[176px] lg:top-[96px] gap-4 lg:gap-0 flex-col lg:flex-row z-40 bg-background-100 py-2">
+            <TabsList className="flex gap-3 overflow-x-scroll w-full items-start justify-start rounded-lg">
               <TabsTrigger
                 value="All Concerts"
                 onClick={() => filterEvents("All Concerts")}
@@ -126,11 +128,13 @@ const Category = () => {
                 </TabsTrigger>
               ))}
             </TabsList>
-            <Button variant={"outline"}>Filter</Button>
+            <Button variant={"outline"} className="w-fit">
+              Filter
+            </Button>
           </div>
           <TabsContent
             value={selectedCategory}
-            className="grid grid-cols-4 h-fit gap-4 gap-y-8 w-full justify-center"
+            className="grid grid-cols-1 lg:grid-cols-4 h-fit gap-4 gap-y-8 w-full justify-center"
           >
             {/* Conditional rendering based on loading and data availability */}
             {loading ? (

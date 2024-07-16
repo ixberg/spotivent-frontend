@@ -14,8 +14,7 @@ const CreateEvent = () => {
         <div>
           <h1 className="font-semibold text-xl">Create New Event</h1>
         </div>
-
-        <div className="p-12 bg-white/10 rounded-lg h-fit">
+        <div className="lg:p-12 p-8 bg-white/10 rounded-lg h-fit">
           <CreateEventForm></CreateEventForm>
         </div>
       </div>

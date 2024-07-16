@@ -54,7 +54,7 @@ const SignIn = () => {
 
   return (
     <div className="flex justify-center h-fit">
-      <div className="flex flex-col gap-12 py-16 px-20 bg-background-100 w-[680px] rounded-xl">
+      <div className="flex flex-col gap-12 p-10 lg:py-16 w-fit lg:px-20 bg-background-100 lg:w-[680px] rounded-xl">
         <h1 className="text-center font-bold text-3xl">Sign In</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

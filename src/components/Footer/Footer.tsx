@@ -4,9 +4,9 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <div className="p-2">
-      <div className="w-full py-10 px-20 bg-background-100">
-        <div className="flex justify-between items-start">
-          <div className="flex flex-col gap-8">
+      <div className="w-full p-10 lg:py-10 lg:px-20 bg-background-100">
+        <div className="flex flex-col gap-12 lg:flex-row  justify-between items-start">
+          <div className="flex flex-col gap-4">
             <div className="flex gap-4 items-center">
               <Image src="/Logo.svg" alt="logo" width={44} height={44} />
               <div>
@@ -18,7 +18,7 @@ const Footer = () => {
             <p>Copyright © 2022. All Rights Reserved.</p>
           </div>
 
-          <div className="flex gap-20">
+          <div className="flex flex-col gap-10 lg:flex-row lg:gap-20">
             <div className="flex flex-col gap-4">
               <p className="font-bold">Page Menus</p>
               <ul className="flex flex-col gap-2">

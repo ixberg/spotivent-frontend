@@ -65,11 +65,13 @@ const Upcoming: React.FC = () => {
 
   return (
     <div className="px-2 w-full">
-      <div className="flex flex-col w-full bg-background-100 h-[615px] rounded-lg p-20 gap-10">
+      <div className="flex flex-col w-full bg-background-100 h-fit lg:h-[615px] rounded-lg p-10 lg:p-20 gap-10">
         <div className="flex justify-between w-full">
-          <h1 className="font-syne text-3xl font-bold">Upcoming Event</h1>
+          <h1 className="font-syne text-2xl lg:text-3xl font-bold">
+            Upcoming Event
+          </h1>
         </div>
-        <Carousel opts={{ align: "start" }} className="w-full">
+        <Carousel opts={{ align: "start" }} className="w-full ">
           <CarouselContent>
             {events.map((event) => (
               <CarouselItem
@@ -86,6 +88,7 @@ const Upcoming: React.FC = () => {
                     country={event.country}
                     price={event.price}
                     onClick={() => handleCardClick(event)}
+                    width="w-full lg:w-fit"
                   />
                 </div>
               </CarouselItem>

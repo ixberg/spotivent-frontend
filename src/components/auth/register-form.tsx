@@ -56,7 +56,7 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center h-fit">
-      <div className="flex flex-col gap-12 py-16 px-20 bg-background-100 w-[680px] rounded-xl">
+      <div className="flex flex-col gap-8 lg:gap-12 p-10 w-fit lg:py-16 lg:px-20 bg-background-100 lg:w-[680px] rounded-xl">
         <h1 className="text-center font-semibold text-3xl">
           Create an account
         </h1>

@@ -6,6 +6,7 @@ import Header from "./header";
 import Footer from "@/components/Footer/Footer";
 import { usePathname } from "next/navigation";
 import ReduxProvider from "./ReduxProvide";
+import { SessionProvider } from "next-auth/react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,11 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ReduxProvider>
-          {!shouldDisableHeaderFooter && <Header />}
-          {children}
-          {!shouldDisableHeaderFooter && <Footer />}
-        </ReduxProvider>
+        <SessionProvider>
+          <ReduxProvider>
+            {!shouldDisableHeaderFooter && <Header />}
+            {children}
+            {!shouldDisableHeaderFooter && <Footer />}
+          </ReduxProvider>
+        </SessionProvider>
       </body>
     </html>
   );

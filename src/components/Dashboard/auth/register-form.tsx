@@ -98,7 +98,6 @@ const SignUp = () => {
                   </FormItem>
                 )}
               />
-              <div>Event</div>
               <FormField
                 control={form.control}
                 name="password"

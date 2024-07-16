@@ -23,7 +23,7 @@ const Header = (props: {
               e.stopPropagation();
               props.setSidebarOpen(!props.sidebarOpen);
             }}
-            className="z-99999 block text-white rounded-sm p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+            className="z-99999 block text-white rounded-sm p-1.5 shadow-sm lg:hidden"
           >
             <Menu />
           </Button>

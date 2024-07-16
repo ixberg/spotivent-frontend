@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
-    <div className="px-2 w-full mt-[96px]">
+    <div className="px-2 w-full lg:mt-[96px] mt-44">
       <div className="flex items-center relative h-[535px] rounded-lg overflow-hidden">
         <Image
           src="/image/banner.png"
@@ -13,7 +13,7 @@ const Hero = () => {
           height={535}
           className="object-cover h-full w-full absolute -z-10"
         ></Image>
-        <div className="flex flex-col gap-5 relative left-20 justify-center w-fit">
+        <div className="flex flex-col gap-5 relative p-8 lg:left-20 justify-center w-fit">
           <Image
             src="/image/image-logo.png"
             alt="logo"
@@ -26,8 +26,9 @@ const Hero = () => {
             Find concerts near you
           </h1>
           <p>
-            Get personalized concert recommendations and <br /> stay connected
-            with your favorite artists
+            Get personalized concert recommendations and{" "}
+            <br className="hidden lg:inline" /> stay connected with your
+            favorite artists
           </p>
           <Button className="w-fit">Get Started</Button>
         </div>

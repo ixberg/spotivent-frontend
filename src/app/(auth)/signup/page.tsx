@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const SignUpPage = () => {
   return (
-    <main className="flex items-center justify-center min-h-screen">
+    <main className="flex flex-col p-8 lg:p-0 lg:flex-row items-center justify-center min-h-screen">
       <div className="flex flex-col basis-2/5 justify-center">
         <div className="flex flex-col gap-4 items-center">
           <Image
@@ -19,10 +19,10 @@ const SignUpPage = () => {
             alt="logo"
             width={180}
             height={180}
-            className="animate-spin"
+            className="animate-spin lg:w-[180px] w-28"
           />
           <div className="flex flex-col gap-4">
-            <p className="font-bold text-6xl font-inter tracking-tighter text-primary-500">
+            <p className="font-bold text-4xl text-center lg:text-6xl font-inter tracking-tighter text-primary-500">
               Spotivent
             </p>
             <p className="font-thin text-lg">Enjoy the amazing music fest!</p>
