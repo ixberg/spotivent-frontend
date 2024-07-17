@@ -94,7 +94,7 @@ const Header: React.FC = () => {
           {session ? (
             <div
               className="flex items-center gap-2"
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() => signOut({ callbackUrl: "/signin" })}
             >
               <div>
                 <h1 className="font-semibold">

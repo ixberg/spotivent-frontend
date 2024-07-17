@@ -8,7 +8,6 @@ import { useTransition } from "react";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,19 +20,22 @@ import { FormError } from "../ui/form-error";
 import { FormSuccess } from "../ui/form-success";
 import { register } from "@/actions/registerUser";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isPanding, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof UserRegisterSchema>>({
     resolver: zodResolver(UserRegisterSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
+      role: "USER",
       referralCode: "",
     },
   });
@@ -42,17 +44,19 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
 
-  function onSubmit(values: z.infer<typeof UserRegisterSchema>) {
+  const onSubmit = (values: z.infer<typeof UserRegisterSchema>) => {
     setError("");
     setSuccess("");
-
     startTransition(() => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        if (data.success) {
+          router.push("/signin");
+        }
       });
     });
-  }
+  };
 
   return (
     <div className="flex justify-center h-fit">
@@ -65,7 +69,7 @@ const SignUp = () => {
             <div className="space-y-4">
               <FormField
                 control={form.control}
-                name="name"
+                name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Name</FormLabel>
@@ -73,7 +77,7 @@ const SignUp = () => {
                       <Input
                         placeholder="Enter your name"
                         {...field}
-                        disabled={isPanding}
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -91,7 +95,7 @@ const SignUp = () => {
                         type="email"
                         placeholder="email@example.com"
                         {...field}
-                        disabled={isPanding}
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -110,7 +114,7 @@ const SignUp = () => {
                           type={showPassword ? "text" : "password"}
                           placeholder="Password"
                           {...field}
-                          disabled={isPanding}
+                          disabled={isPending}
                         />
                         <button
                           type="button"
@@ -135,29 +139,37 @@ const SignUp = () => {
                       <Input
                         placeholder="Enter referral code (optional)"
                         {...field}
-                        disabled={isPanding}
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="role"
+                render={({ field }) => (
+                  <FormItem className="hidden">
+                    <FormLabel>Role</FormLabel>
+                    <FormControl>
+                      <Input {...field} disabled={isPending} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <FormError message={error}></FormError>
-            <FormSuccess message={success}></FormSuccess>
+            <FormError message={error} />
+            <FormSuccess message={success} />
             <Button
               type="submit"
               size="lg"
               className="w-full"
-              disabled={isPanding}
+              disabled={isPending}
             >
               Register
             </Button>
-            {/* <div className="flex gap-2 w-full items-center">
-              <hr className="w-full border-dashed border-white/50" />
-              <p className="w-fit font-light">Or</p>
-              <hr className="w-full border-dashed border-white/50" />
-            </div> */}
           </form>
         </Form>
         <p className="text-center">

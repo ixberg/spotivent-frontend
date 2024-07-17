@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 const SignUpPage = () => {
   return (
-    <main className="flex items-center justify-center min-h-screen">
+    <main className="flex flex-col gap-8 lg:gap-0 p-8 lg:p-0 lg:flex-row items-center justify-center min-h-screen">
       <div className="flex basis-2/5 justify-center">
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col lg:flex-row gap-4 items-center justify-center">
           <Image
             src="/Logo.svg"
             alt="logo"
@@ -21,7 +21,7 @@ const SignUpPage = () => {
             height={100}
             className="animate-spin"
           />
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 text-center lg:text-start">
             <p className="font-bold text-6xl font-inter tracking-tighter">
               Spotivent
             </p>

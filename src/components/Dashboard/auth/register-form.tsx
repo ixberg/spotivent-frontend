@@ -21,12 +21,14 @@ import { FormError } from "../../ui/form-error";
 import { FormSuccess } from "../../ui/form-success";
 import { register } from "@/actions/registerEo";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPanding, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -34,6 +36,7 @@ const SignUp = () => {
       name: "",
       email: "",
       password: "",
+      role: "ORGANIZER",
     },
   });
 
@@ -50,6 +53,9 @@ const SignUp = () => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        if (data.success) {
+          router.push("/signin");
+        }
       });
     });
   }
@@ -120,6 +126,23 @@ const SignUp = () => {
                           {showPassword ? <EyeOff /> : <Eye />}
                         </button>
                       </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="role"
+                render={({ field }) => (
+                  <FormItem className="hidden">
+                    <FormLabel>Role</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your name"
+                        {...field}
+                        disabled={isPanding}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

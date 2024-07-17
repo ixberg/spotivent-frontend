@@ -20,10 +20,11 @@ export const RegisterSchema = z.object({
   password: z.string().min(8, {
     message: "Minimum 8 character required!",
   }),
+  role: z.string().optional(),
 });
 
 export const UserRegisterSchema = z.object({
-  name: z.string().min(2, {
+  username: z.string().min(2, {
     message: "Name is required, minimum 2 characters",
   }),
   email: z.string().email({
@@ -33,6 +34,7 @@ export const UserRegisterSchema = z.object({
     message: "Minimum 8 character required!",
   }),
   referralCode: z.string().optional(),
+  role: z.string().optional(),
 });
 
 const ticketTierSchema = z.object({

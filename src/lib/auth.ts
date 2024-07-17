@@ -142,12 +142,12 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }: { session: any; token: JWT }) {
       session.user.role = token.role;
       session.user.accessToken = token.accessToken;
-      console.log(session);
+      // console.log(session);
       return session;
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/signin",
   },
   secret: process.env.NEXTAUTH_SECRET,
   session: {
