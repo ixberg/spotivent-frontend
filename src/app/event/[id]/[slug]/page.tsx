@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { Button } from "@/components/ui/button";
 import { resetTicketOrders } from "@/store/ticketSlice";
+import { useSession } from "next-auth/react";
 
 type Event = {
   title: string;
@@ -21,6 +22,7 @@ type Event = {
 };
 
 const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
+  const { data: session, status } = useSession();
   const { id, slug } = params;
   const [event, setEvent] = useState<Event | null>(null);
   const ticketOrders = useSelector(
@@ -59,7 +61,9 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
   }
 
   const handleBookNow = () => {
-    if (ticketOrders.length > 0) {
+    if (status === "unauthenticated") {
+      router.push("/signin");
+    } else if (ticketOrders.length > 0) {
       router.push(`/checkout/${slug}`);
     }
   };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 interface TicketTier {
   tier: string;
@@ -31,12 +32,8 @@ const useFetchEvents = (url: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const result: Event[] = await response.json();
-        setData(result);
+        const response = await axios.get(url);
+        setData(response.data);
       } catch (error) {
         setError(error as Error);
       } finally {

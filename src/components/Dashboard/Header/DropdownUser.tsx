@@ -3,6 +3,7 @@ import Link from "next/link";
 import ClickOutside from "@/components/Dashboard/ClickOutside";
 import { User2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -43,7 +44,7 @@ const DropdownUser = () => {
       {/* <!-- Dropdown Start --> */}
       {dropdownOpen && (
         <div className="absolute px-4 py-2 right-0 mt-4 flex flex-col gap-2 rounded-sm border border-white/10 bg-background-50 shadow-default">
-          <Link href="/dashboard/profile">
+          <div>
             <Button
               variant="noFill"
               className="h-14 text-white text-base flex gap-1 w-full"
@@ -53,11 +54,12 @@ const DropdownUser = () => {
               </span>
               My Profile
             </Button>
-          </Link>
+          </div>
           <Link href="/dashboard/signin">
             <Button
               variant="noFill"
               className="h-14 text-white text-base flex gap-1 w-full"
+              onClick={() => signOut({ callbackUrl: "/signin" })}
             >
               <span>
                 <LogOut />

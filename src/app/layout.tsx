@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const disableHeaderFooter = ["/signin", "/signup"];
+  const disableHeaderFooter = ["/signin", "/signup", "/unauthorized"];
 
   const shouldDisableHeaderFooter =
     disableHeaderFooter.includes(pathname) ||

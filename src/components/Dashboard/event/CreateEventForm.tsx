@@ -122,9 +122,9 @@ const CreateEventForm: React.FC = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    <SelectItem value="light">Jazz</SelectItem>
+                    <SelectItem value="dark">Solo Artist</SelectItem>
+                    <SelectItem value="system">Opera</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -200,9 +200,9 @@ const CreateEventForm: React.FC = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    <SelectItem value="light">Jakarta</SelectItem>
+                    <SelectItem value="dark">Papua</SelectItem>
+                    <SelectItem value="system">Samarinda</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

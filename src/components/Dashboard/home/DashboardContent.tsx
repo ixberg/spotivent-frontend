@@ -8,14 +8,18 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  // const { data: session, status } = useSession();
+  // const { user } = session || {};
+  // const router = useRouter();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/signin");
-    }
-  }, [status, router]);
+  // useEffect(() => {
+  //   if (
+  //     status === "unauthenticated" ||
+  //     (session && session.user && session.user.role !== "organizer")
+  //   ) {
+  //     router.push("/signin");
+  //   }
+  // }, [status, router, session]);
 
   return (
     <DefaultLayout>

@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { Event } from "@/app/header"; // Adjust the path if needed
 import ClickOutside from "../Dashboard/ClickOutside";
+import slugify from "@/lib/slugify";
+import { useRouter } from "next/navigation";
 
 interface SearchResultsProps {
   results: Event[];
@@ -20,8 +22,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   dropdownOpen,
   setDropdownOpen,
 }) => {
+  const router = useRouter();
   if (query && loading) return <div>Loading...</div>;
   if (query && error) return <div>Error: {error.message}</div>;
+
+  const handleCardClick = (event: Event) => {
+    const slug = slugify(event.title);
+    router.push(`/event/${event.id}/${slug}`);
+    setDropdownOpen(false);
+  };
 
   return (
     dropdownOpen && (
@@ -32,7 +41,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
               results.map((result) => (
                 <li
                   key={result.id}
-                  className="flex items-center gap-4 p-4 hover:bg-white/20"
+                  className="flex items-center gap-4 p-4 hover:bg-white/20 cursor-pointer"
+                  onClick={() => handleCardClick(result)}
                 >
                   <Image
                     src={result.thumbnail}

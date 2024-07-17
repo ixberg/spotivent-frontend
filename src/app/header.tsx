@@ -7,6 +7,8 @@ import Fuse from "fuse.js";
 import { debounce } from "lodash";
 import useFetchEvents from "@/hooks/useFetchEvent";
 import SearchResults from "@/components/elements/SearchResult";
+import { useSession } from "next-auth/react";
+import type { Session } from "next-auth";
 export interface Event {
   id: string;
   date: string;
@@ -29,6 +31,7 @@ export interface Event {
 }
 
 const Header: React.FC = () => {
+  const { data: session } = useSession();
   const { data, loading, error } = useFetchEvents(
     "http://localhost:8080/events"
   );
@@ -88,12 +91,23 @@ const Header: React.FC = () => {
         </div>
         <DropDownAuth />
         <div className="hidden lg:flex gap-4">
-          <Link href="/signup">
-            <button className="px-5 h-full">Sign Up</button>
-          </Link>
-          <button className="px-5 py-2 rounded-full bg-white text-black">
-            Log In
-          </button>
+          {session ? (
+            <div className="flex items-center gap-2">
+              <span>Welcome, {session.user?.name || session.user?.email}</span>
+              <DropDownAuth />
+            </div>
+          ) : (
+            <>
+              <Link href="/signup">
+                <button className="px-5 h-full">Sign Up</button>
+              </Link>
+              <Link href="/signin">
+                <button className="px-5 py-2 rounded-full bg-white text-black">
+                  Log In
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <SearchResults
