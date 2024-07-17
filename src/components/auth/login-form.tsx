@@ -110,7 +110,7 @@ const SignIn = () => {
             <Button
               type="submit"
               size="lg"
-              className="w-full mt-4"
+              className="w-full"
               disabled={isPanding}
             >
               Login

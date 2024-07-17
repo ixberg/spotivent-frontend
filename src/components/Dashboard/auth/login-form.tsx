@@ -48,23 +48,29 @@ const SignIn = () => {
     setSuccess("");
 
     startTransition(async () => {
-      const result = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      });
+      try {
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        });
 
-      if (result?.error) {
-        setError(result.error);
-      } else if (result?.ok) {
-        setSuccess("Logged in successfully!");
-        const res = await fetch("/api/auth/session");
-        const session = await res.json();
-        if (session.user.role === "organizer") {
-          router.push("/dashboard");
-        } else {
-          router.push("/");
+        if (result?.error) {
+          setError(result.error);
+        } else if (result?.ok) {
+          setSuccess("Logged in successfully!");
+          const session = await fetch("/api/auth/session").then((res) =>
+            res.json()
+          );
+          if (session?.user?.role === "ORGANIZER") {
+            router.push("/dashboard");
+          } else {
+            router.push("/");
+          }
         }
+      } catch (error) {
+        setError("An error occurred during sign in");
+        console.error(error);
       }
     });
   }

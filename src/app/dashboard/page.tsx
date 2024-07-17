@@ -2,7 +2,7 @@
 import DashboardContent from "@/components/Dashboard/home/DashboardContent";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth";
+import { authOptions } from "../../lib/auth";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ const DashboardPage = async () => {
 
   if (!session) {
     redirect("/signin");
-  } else if (session.user.role !== "organizer") {
+  } else if (session.user.role !== "ORGANIZER") {
     redirect("/unauthorized");
   }
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { ChevronDown, MapPin } from "lucide-react";
 import DropDownAuth from "@/components/elements/DropDownAuth";
 import Fuse from "fuse.js";
 import { debounce } from "lodash";
 import useFetchEvents from "@/hooks/useFetchEvent";
 import SearchResults from "@/components/elements/SearchResult";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import type { Session } from "next-auth";
 export interface Event {
   id: string;
@@ -92,9 +92,17 @@ const Header: React.FC = () => {
         <DropDownAuth />
         <div className="hidden lg:flex gap-4">
           {session ? (
-            <div className="flex items-center gap-2">
-              <span>Welcome, {session.user?.name || session.user?.email}</span>
-              <DropDownAuth />
+            <div
+              className="flex items-center gap-2"
+              onClick={() => signOut({ callbackUrl: "/" })}
+            >
+              <div>
+                <h1 className="font-semibold">
+                  {" "}
+                  {session.user?.name || session.user?.email}
+                </h1>
+              </div>
+              <ChevronDown />
             </div>
           ) : (
             <>
