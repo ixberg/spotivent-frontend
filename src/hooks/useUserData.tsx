@@ -1,20 +1,30 @@
 import { useState, useEffect } from "react";
 import { Session } from "next-auth";
-import jwtDecode from "jsonwebtoken";
 
-interface UserProfileData {
-  email: string;
-  username: string;
-  referralCode: string;
+interface UserProfileResponse {
+  statusCode: number;
+  message: string;
+  success: boolean;
+  data: {
+    id: number;
+    avatar: string | null;
+    email: string;
+    role: string;
+    username: string;
+    referralCode: string;
+  };
 }
 
-interface UserPointData {
+interface PointResponse {
+  statusCode: number;
+  message: string;
+  success: boolean;
   data: number;
 }
 
 export const useUserData = (session: Session | null) => {
   const [userData, setUserData] = useState<
-    (UserProfileData & UserPointData) | null
+    (UserProfileResponse["data"] & { point: number }) | null
   >(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -28,21 +38,13 @@ export const useUserData = (session: Session | null) => {
       }
 
       try {
-        // Decode the access token to get the user ID
-        const decodedToken: any = jwtDecode.decode(session.user.accessToken);
-        const userId = decodedToken.id;
-
-        if (!userId) {
-          throw new Error("User ID not found in token");
-        }
-
         const [profileResponse, pointResponse] = await Promise.all([
-          fetch(`/api/proxy/api/v1/user/profile/${userId}`, {
+          fetch(`/api/proxy/api/v1/user/profile`, {
             headers: {
               Authorization: `Bearer ${session.user.accessToken}`,
             },
           }),
-          fetch(`/api/proxy/api/v1/point/${userId}`, {
+          fetch(`/api/proxy/api/v1/point`, {
             headers: {
               Authorization: `Bearer ${session.user.accessToken}`,
             },
@@ -53,11 +55,10 @@ export const useUserData = (session: Session | null) => {
           throw new Error("Failed to fetch user data");
         }
 
-        const profileData: { data: UserProfileData } =
-          await profileResponse.json();
-        const pointData: { data: UserPointData } = await pointResponse.json();
+        const profileData: UserProfileResponse = await profileResponse.json();
+        const pointData: PointResponse = await pointResponse.json();
 
-        setUserData({ ...profileData.data, ...pointData.data });
+        setUserData({ ...profileData.data, point: pointData.data });
       } catch (err) {
         setError(err instanceof Error ? err : new Error("An error occurred"));
       } finally {

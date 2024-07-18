@@ -26,6 +26,54 @@ const Profile: React.FC = () => {
         { tier: "General Admission", quantity: 1 },
       ],
     },
+    {
+      id: 2,
+      eventName: "Jazz Nights 2024",
+      date: "2024-05-30",
+      time: "19:00 - 22:00",
+      location: "Blue Note Jazz Club, New York City",
+      status: "completed",
+      tickets: [
+        { tier: "VIP", quantity: 4 },
+        { tier: "General Admission", quantity: 6 },
+      ],
+    },
+    {
+      id: 3,
+      eventName: "Rock and Roll Reunion 2024",
+      date: "2024-07-05",
+      time: "18:00 - 23:00",
+      location: "Madison Square Garden, New York City",
+      status: "completed",
+      tickets: [
+        { tier: "VIP", quantity: 3 },
+        { tier: "General Admission", quantity: 10 },
+      ],
+    },
+    {
+      id: 4,
+      eventName: "Pop Extravaganza 2024",
+      date: "2024-09-10",
+      time: "17:00 - 22:00",
+      location: "Staples Center, Los Angeles",
+      status: "upcoming",
+      tickets: [
+        { tier: "VIP", quantity: 5 },
+        { tier: "General Admission", quantity: 20 },
+      ],
+    },
+    {
+      id: 5,
+      eventName: "Electronic Dance Party 2024",
+      date: "2024-04-25",
+      time: "20:00 - 02:00",
+      location: "Warehouse District, Miami",
+      status: "completed",
+      tickets: [
+        { tier: "VIP", quantity: 6 },
+        { tier: "General Admission", quantity: 15 },
+      ],
+    },
   ];
 
   const upcomingTickets = userTickets.filter(

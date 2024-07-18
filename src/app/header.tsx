@@ -80,12 +80,15 @@ const Header: React.FC = () => {
   return (
     <div className="w-full p-2 bg-background-500 z-50 fixed">
       <div className="flex lg:flex-row justify-between lg:items-center bg-background-100 h-40 lg:h-[80px] rounded-lg p-4 lg:px-10 relative">
-        <div className="flex h-fit gap-2 items-center">
-          <Image src="/Logo.svg" alt="logo" width={44} height={44} />
-          <p className="font-bold text-xl font-inter tracking-tighter">
-            Spotivent
-          </p>
-        </div>
+        <Link href={"/"}>
+          <div className="flex h-fit gap-2 items-center">
+            <Image src="/Logo.svg" alt="logo" width={44} height={44} />
+            <p className="font-bold text-xl font-inter tracking-tighter">
+              Spotivent
+            </p>
+          </div>
+        </Link>
+
         <div className="flex flex-grow justify-center w-full lg:w-auto pr-8 lg:p-0 bottom-4 lg:bottom-auto items-center gap-4 absolute lg:right-1/2 lg:translate-x-1/2">
           <input
             type="text"
