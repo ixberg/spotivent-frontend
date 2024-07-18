@@ -152,7 +152,7 @@ export const authOptions: NextAuthOptions = {
       session.user.username = token.username;
       session.user.point = token.point;
 
-      console.log("Session Callback - session:", session); // Logging session
+      // console.log("Session Callback - session:", session); // Logging session
 
       return session;
     },

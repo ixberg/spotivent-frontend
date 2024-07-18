@@ -2,16 +2,16 @@ import React from "react";
 import { CircleUserRound, CircleDollarSign, TicketPercent } from "lucide-react";
 
 interface UserInfoProps {
-  name: string;
+  username: string;
   email: string;
-  points: number;
+  point: number;
   referralCode: string;
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({
-  name,
+  username,
   email,
-  points,
+  point,
   referralCode,
 }) => {
   return (
@@ -23,7 +23,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
           className="text-primary-500"
         />
         <div className="flex flex-col gap-2">
-          <p className="font-semibold text-xl text-center">{name}</p>
+          <p className="font-semibold text-xl text-center">{username}</p>
           <p className="font-light text-xs text-center">{email}</p>
         </div>
       </div>
@@ -36,7 +36,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
           <p>My Point</p>
         </div>
         <span className="font-semibold text-lg ml-8">
-          Rp{points.toLocaleString("id-ID")}
+          Rp{point.toLocaleString("id-ID")}
         </span>
       </div>
       <div className="flex flex-col gap-2">

@@ -9,7 +9,7 @@ const page = async () => {
 
   if (!session) {
     redirect("/signin");
-  } else if (session.user.role !== "ORGANIZER") {
+  } else if (session.user.role !== "USER") {
     redirect("/unauthorized");
   }
   const price = 100000;

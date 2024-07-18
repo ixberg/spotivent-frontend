@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import UserInfo from "./UserInfo";
 import TicketList from "./TicketList";
@@ -119,9 +119,9 @@ const Profile: React.FC = () => {
     <section className="px-2 w-full mt-44 lg:mt-[96px]">
       <div className="w-full bg-background-500 p-0 lg:p-20 flex flex-col lg:flex-row gap-12">
         <UserInfo
-          name="Ahmad Wiryawan"
+          username="Ahmad Wiryawan"
           email="ahmadwiryawan@gmail.com"
-          points={100000}
+          point={100000}
           referralCode="asdas9230232n3jken2"
         />
         <div className="basis-2/3">
