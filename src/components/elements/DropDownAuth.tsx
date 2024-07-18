@@ -8,7 +8,7 @@ const DropDownAuth = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
-      <Link onClick={() => setDropdownOpen(!dropdownOpen)} href="#">
+      <div onClick={() => setDropdownOpen(!dropdownOpen)}>
         <div className="lg:hidden flex h-[44px] items-center">
           <Menu />
         </div>
@@ -35,7 +35,7 @@ const DropDownAuth = () => {
             </Link>
           </div>
         )}
-      </Link>
+      </div>
     </ClickOutside>
   );
 };

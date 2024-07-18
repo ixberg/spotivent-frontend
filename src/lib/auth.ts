@@ -75,11 +75,11 @@
 
 //----------------------------------------------for backend intergration----------------------------------------------------//
 
-import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextAuthOptions, User } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import axios from "axios";
+import jwtDecode from "jsonwebtoken";
 import { cookies } from "next/headers";
 
 export const authOptions: NextAuthOptions = {
@@ -108,7 +108,7 @@ export const authOptions: NextAuthOptions = {
               },
             }
           );
-          // console.log(response);
+
           const user = response.data;
           const useCookies = cookies();
           useCookies.set("sid", user.token);
@@ -132,17 +132,28 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
-      if (user) {
+      if (user && user.token) {
         token.role = user.role;
         token.accessToken = user.token;
+
+        // Decode the token to get the username
+        const decodedToken: any = jwtDecode.decode(user.token);
+        token.username = decodedToken.username;
+        token.point = decodedToken.point;
       }
+
+      // console.log("JWT Callback - token:", token); // Logging token
 
       return token;
     },
     async session({ session, token }: { session: any; token: JWT }) {
       session.user.role = token.role;
       session.user.accessToken = token.accessToken;
-      // console.log(session);
+      session.user.username = token.username;
+      session.user.point = token.point;
+
+      console.log("Session Callback - session:", session); // Logging session
+
       return session;
     },
   },

@@ -1,14 +1,21 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, MapPin } from "lucide-react";
+import { User2, MapPin, CirclePercent } from "lucide-react";
 import DropDownAuth from "@/components/elements/DropDownAuth";
 import Fuse from "fuse.js";
 import { debounce } from "lodash";
 import useFetchEvents from "@/hooks/useFetchEvent";
 import SearchResults from "@/components/elements/SearchResult";
 import { signOut, useSession } from "next-auth/react";
-import type { Session } from "next-auth";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
 export interface Event {
   id: string;
   date: string;
@@ -32,6 +39,9 @@ export interface Event {
 
 const Header: React.FC = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+  // console.log("Header - session:", session); // Logging session in Header
+
   const { data, loading, error } = useFetchEvents(
     "http://localhost:8080/events"
   );
@@ -89,21 +99,103 @@ const Header: React.FC = () => {
             <p className="hidden lg:block">Jakarta, Indonesia</p>
           </div>
         </div>
-        <DropDownAuth />
+        <div>
+          {session ? (
+            <Popover>
+              <PopoverTrigger>
+                <div className="lg:hidden flex items-center rounded-full bg-black justify-center h-[44px] w-[44px]">
+                  <User2 />
+                </div>
+              </PopoverTrigger>
+              <PopoverContent className="p-4">
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-1 justify-end text-end">
+                    <h1 className="text-sm font-semibold">
+                      {" "}
+                      {session.user.username || session.user.email}
+                    </h1>
+                    <div className="flex gap-1 items-center justify-end">
+                      <div className="flex p-1 rounded-full bg-yellow-500">
+                        <CirclePercent size={10} />
+                      </div>
+                      <p className="text-sm font-light">
+                        {session.user.point || 0}
+                      </p>
+                    </div>
+                  </div>
+                  <hr className="border-[1px] border-white/20 border-dashed" />
+                  <div className="flex flex-col">
+                    <Button
+                      variant={"noFill"}
+                      className="text-white"
+                      onClick={() => router.push("/profile")}
+                      size={"lg"}
+                    >
+                      Profile
+                    </Button>
+                    <Button
+                      variant={"noFill"}
+                      className="text-white"
+                      onClick={() => signOut({ callbackUrl: "/signin" })}
+                      size={"lg"}
+                    >
+                      Log Out
+                    </Button>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          ) : (
+            <DropDownAuth />
+          )}
+        </div>
+
         <div className="hidden lg:flex gap-4">
           {session ? (
-            <div
-              className="flex items-center gap-2"
-              onClick={() => signOut({ callbackUrl: "/signin" })}
-            >
-              <div>
-                <h1 className="font-semibold">
-                  {" "}
-                  {session.user?.name || session.user?.email}
-                </h1>
-              </div>
-              <ChevronDown />
-            </div>
+            <Popover>
+              <PopoverTrigger>
+                <div
+                  className="flex items-center gap-2"
+                  // onClick={() => signOut({ callbackUrl: "/signin" })}
+                >
+                  <div className="flex flex-col gap-1 justify-end text-end">
+                    <h1 className="text-sm font-semibold">
+                      {" "}
+                      {session.user.username || session.user.email}
+                    </h1>
+                    <div className="flex gap-1 items-center justify-end">
+                      <div className="flex p-1 rounded-full bg-yellow-500">
+                        <CirclePercent size={10} />
+                      </div>
+                      <p className="text-sm font-light">
+                        {session.user.point || 0}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex p-3 bg-black rounded-full border-[1px] border-white/20">
+                    <User2 />
+                  </div>
+                </div>
+              </PopoverTrigger>
+              <PopoverContent className="right-0">
+                <Button
+                  variant={"noFill"}
+                  className="text-white"
+                  onClick={() => router.push("/profile")}
+                  size={"lg"}
+                >
+                  Profile
+                </Button>
+                <Button
+                  variant={"noFill"}
+                  className="text-white"
+                  onClick={() => signOut({ callbackUrl: "/signin" })}
+                  size={"lg"}
+                >
+                  Log Out
+                </Button>
+              </PopoverContent>
+            </Popover>
           ) : (
             <>
               <Link href="/signup">
