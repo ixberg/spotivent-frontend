@@ -4,9 +4,9 @@ import { CircleUserRound, CircleDollarSign, TicketPercent } from "lucide-react";
 const Profile = () => {
   const point = 100000;
   return (
-    <section className="px-2 w-full mt-[96px]">
-      <div className="w-full bg-background-500 p-20 flex gap-12">
-        <div className="p-5 bg-white/10 basis-1/3 sticky top-[100px] h-fit rounded-xl flex flex-col gap-5 ">
+    <section className="px-2 w-full mt-44 lg:mt-[96px]">
+      <div className="w-full bg-background-500 p-0 lg:p-20 flex flex-col lg:flex-row gap-12">
+        <div className="p-8 lg:p-5 bg-white/10 basis-1/3 lg:sticky lg:top-[100px] h-fit rounded-xl flex flex-col gap-5 ">
           <div className="flex flex-col gap-4 items-center">
             <CircleUserRound
               size={90}

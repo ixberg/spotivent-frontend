@@ -31,8 +31,8 @@ const Checkout = ({ params }: { params: { slug: string } }) => {
     <main className="flex min-h-screen flex-col items-center gap-2">
       <Header />
       <section className="px-2 w-full mt-[96px]">
-        <div className="flex flex-col w-full bg-background-100 min-h-screen rounded-lg p-20 gap-10">
-          <div className="flex gap-12 w-full justify-between">
+        <div className="flex flex-col w-full bg-background-100 min-h-screen rounded-lg p-8 lg:p-20 gap-10">
+          <div className="flex flex-col lg:flex-row gap-12 w-full justify-between">
             <div className="flex flex-col gap-6 basis-3/5">
               <h1 className="text-2xl font-semibold">Contact Detail</h1>
               <div className="p-4 bg-blue-500/20 rounded-lg border-blue-500 border flex gap-4">

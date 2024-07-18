@@ -6,12 +6,22 @@ import { DataTable } from "@/components/ui/data-table";
 import { column } from "./components/column-table";
 import Link from "next/link";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import authOptions from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Dashboard | My Event",
 };
 
-const page = () => {
+const page = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/signin");
+  } else if (session.user.role !== "ORGANIZER") {
+    redirect("/unauthorized");
+  }
   return (
     <DefaultLayout>
       <div className="flex w-full flex-col gap-10">

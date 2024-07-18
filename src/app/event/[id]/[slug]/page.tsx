@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import TicketComponent from "@/components/elements/Ticket";
@@ -30,6 +30,11 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
   );
   const dispatch = useDispatch();
   const router = useRouter();
+  const chooseTicketRef = useRef<HTMLDivElement>(null);
+
+  const scrollToChooseTicket = () => {
+    chooseTicketRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   // Calculate the total price
   const totalPrice = ticketOrders.reduce(
@@ -70,8 +75,8 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-2">
-      <section className="px-2 w-full mt-[96px]">
-        <div className="flex flex-col w-full bg-background-100 h-fit rounded-lg p-20 gap-10">
+      <section className="px-2 w-full mt-44 lg:mt-[96px]">
+        <div className="flex flex-col w-full bg-background-100 h-fit rounded-lg p-8 lg:p-20 gap-10">
           <div className="rounded-lg overflow-hidden">
             <Image
               src="/image/event-banner.png"
@@ -83,7 +88,7 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
               className="w-full object-cover"
             />
           </div>
-          <div className="flex gap-12">
+          <div className="flex flex-col-reverse lg:flex-row gap-12">
             <div className="flex flex-col gap-8 basis-3/5">
               <h1 className="font-syne text-3xl font-bold text-primary-500">
                 {event.title}
@@ -111,7 +116,7 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4" ref={chooseTicketRef}>
                 <h1 className="font-bold font-syne text-xl">
                   Choose your ticket
                 </h1>
@@ -136,7 +141,7 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
                   <p className="font-medium text-xl">{event.event_organizer}</p>
                 </div>
               </div>
-              <div className="flex flex-col gap-3 border-white border-[1px] p-6 rounded-2xl sticky top-[120px] overflow-auto">
+              <div className="hidden lg:flex flex-col gap-3 border-white border-[1px] p-6 rounded-2xl sticky top-[120px] overflow-auto">
                 <h2 className="text-white/50">Your Ticket Order</h2>
                 <div>
                   {ticketOrders.length === 0 ? (
@@ -179,6 +184,26 @@ const EventDetail = ({ params }: { params: { id: string; slug: string } }) => {
           </div>
         </div>
       </section>
+      <div
+        className="fixed bottom-0 left-0 right-0 bg-background-100 p-4 border-t border-white/20 lg:hidden"
+        onClick={() =>
+          chooseTicketRef.current?.scrollIntoView({ behavior: "smooth" })
+        }
+      >
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-white/50">Your Ticket Order</h2>
+          <span className="font-bold">
+            Total: Rp{totalPrice.toLocaleString("id-ID")}
+          </span>
+        </div>
+        <Button
+          onClick={handleBookNow}
+          disabled={ticketOrders.length === 0}
+          className="w-full"
+        >
+          Book Now
+        </Button>
+      </div>
     </main>
   );
 };
